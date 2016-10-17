@@ -44,6 +44,10 @@ public class Arrays {
 
 	//EX4
 	public static void sortIPv4Addresses(String[] v, int l, int r){
+        int idx = 0;
+		while(l < r){
+			String aux = v[l];
 
+        }
 	}
 }
