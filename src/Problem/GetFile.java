@@ -37,24 +37,25 @@ public class GetFile {
 		txt3 = br3.readLine();
 		while(txt1 != null || txt2 != null || txt3 != null){
 			if(txt1.equals(txt2)){
-				//save.saveText(x[0]);
-				//x1 = br1.readLine();
+				++t1;
+				txt1 = br1.readLine();
 			}
 			if(txt2.equals(txt3)){
-				//save.saveText(x[0]);
-				//x2 = br2.readLine();
+				++t2;
+				txt2 = br2.readLine();
 			}
 			if(txt3.equals(txt1)){
-				//save.saveText(x[0]);
-				//x3 = br3.readLine();
+				++t3;
+				txt1 = br1.readLine();
+			} else {
+				if((txt1.compareTo(txt2) < 0) && (txt1.compareTo(txt3) < 0)) txt1 = br1.readLine();
+				if((txt2.compareTo(txt1) < 0) && (txt2.compareTo(txt3) < 0)) txt2 = br2.readLine();
+				if((txt3.compareTo(txt1) < 0) && (txt3.compareTo(txt2) < 0)) txt3 = br3.readLine();
+				/*if((txt1.compareTo(txt2) > 0) && (txt1.compareTo(txt3) > 0)) txt1 = br1.readLine();
+				if((txt2.compareTo(txt1) > 0) && (txt2.compareTo(txt3) > 0)) txt2 = br2.readLine();
+				if((txt3.compareTo(txt1) > 0) && (txt3.compareTo(txt2) > 0)) txt3 = br3.readLine();*/
 			}
 		}
-	}
-
-	private void StringUtils(String s1, String s2) throws Exception{
-		if(s1.compareTo(s2) > 0) s2 = br2.readLine();
-		if(s1.compareTo(s2) < 0) s1 = br1.readLine();
-
 	}
 
 	/*private class Compare implements Comparator<String> {
