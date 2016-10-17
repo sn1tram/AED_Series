@@ -43,11 +43,7 @@ public class GetFile {
 			if(txt2.equals(txt3)){
 				//save.saveText(x[0]);
 				//x2 = br2.readLine();
-			}
-			if(txt3.equals(txt1)){
-				//save.saveText(x[0]);
-				//x3 = br3.readLine();
-			}
+
 		}
 	}
 
