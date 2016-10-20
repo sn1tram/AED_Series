@@ -14,6 +14,14 @@ public class Main {
 
 	public static void main(String[] args){
 		int n = 10;
+		/*String s1 = "a", s2 = "b";
+		System.out.println(s1.compareTo(s2)); //-1
+		System.out.println(s2.compareTo(s1)); //1
+		System.out.println(s1.compareTo("")); //1
+		//System.out.println(s1.compareTo(null));
+		System.out.println(s1.equals(null));*/
+
+
 		GetFile getFile = new GetFile(n, s1, s2, s3);
 		/*String[] ipv4 = new String[]{"192.168.1.6", "123.123.123.122"};
 		String Str = new String("Welcome-to-Tutorialspoint.com");
