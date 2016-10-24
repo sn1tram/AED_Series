@@ -23,55 +23,57 @@ public class Main {
 		//System.out.println(s1.compareTo(null));
 		System.out.println(s1.equals(null));*/
 		//GetFile getFile = new GetFile(n, s1, s2, s3);
+		/*String ip = "192.168.1.1";
+		String[] a = ip.split("\\.");
+		String[] ipv4 = new String[]{"192.168.1.1", "192.168.1.4", "80.68.11.31", "192.168.10.33"};
+		//System.out.println(ipv4.length);
+		String[][] x = new String[ipv4.length][ipv4.length];
+		//array bi-dimensional
+		for(int i = 0; i< ipv4.length; ++i)
+			x[i] = ipv4[i].split("\\.");*/
 
-		Integer[] maxHeap = {18, 15, 16, 10, 9, 12, 14, 3, 4, 5, 2 };
-		int [] array = {1, 2, 3, 4, 7, 8, 9, 10, 14, 16};
-
-		buildMaxHeap(array, array.length);
-		show(array);
+		int[] a = {5, 8, 6, 7, 50, 69, 10, 22, 1};
+		ordena(a, a.length);
+		for(int i = 0; i < a.length; ++i)
+			System.out.println(a[i]);
 	}
 
-	public static void changeValueInMaxHeap(int[] v, int count, int ix, int newValue){
+	public static void ordena(int[] a, int m){
+		int n = a.length;
 
-	}
+		int vetorAuxiliar[] = new int[m];
 
-	public static void show(int[] t) {
-		for (int i = 0; i < t.length; i++)
-			System.out.print(t[i] + " ");
-		System.out.println();
-	}
+		//1ª - (Inicializar com zero)
+		for(int i = 0; i < m; i++){
+			vetorAuxiliar[i] = 0;
+		}
 
-	public static void buildMaxHeap(int[] h, int n) {
-		for (int i = n / 2 - 1; i >= 0; i--)
-			maxHeapify(h, i, n);
-	}
+		//2ª - Contagem das ocorrencias
+		for(int i = 0; i < n; i++){
+			vetorAuxiliar[a[i]]++;
+		}
 
-	/*public static int parent(int i) { return (i - 1) / 2; } */
+		//3ª - Ordenando os indices do vetor auxiliar
+		int sum = 0;
+		for(int i = 1; i < m; i++){
+			int dum = vetorAuxiliar[i];
+			vetorAuxiliar[i] = sum;
+			sum += dum;
+		}
+		int vetorOrdenado[] = new int[n];
+		for(int i = 0; i < n; i++){
+			vetorOrdenado[vetorAuxiliar[a[i]]] = a[i];
+			vetorAuxiliar[a[i]]++;
+		}
 
-	public static int left(int i) { return 2 * i + 1; }
-
-	public static int right(int i) { return 2 * i + 2; }
-
-	public static void maxHeapify(int[] h, int i, int n) {
-		int l = left(i);
-		int r = right(i);
-		int largest;
-		if (l < n && h[l] > h[i])
-			largest = l;
-		else largest = i;
-		if (r < n && h[r] > h[largest])
-			largest = r;
-		if (largest != i) {
-			exchange(h, i, largest);
-			maxHeapify(h, largest, n);
+		//4ª Retornando os valores ordenados para o vetor de entrada
+		for (int i = 0; i < n; i++){
+			a[i] = vetorOrdenado[i];
 		}
 	}
 
-	private static void exchange(int[] h, int i, int j) {
-		int aux = h[i];
-		h[i] = h[j];
-		h[j] = aux;
-	}
+
+
 	/*public static void sortIPv4Addresses(String[] v, int l, int r){
 		int idx, i = l+1;
 		int a1, a2;
