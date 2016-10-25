@@ -15,7 +15,7 @@ public class Main {
 	static String s3 = "f3.txt";
 
 	public static void main(String[] args){
-		int n = 5;
+		int n = 12;
 		/*String s1 = "a", s2 = "b";
 		System.out.println(s1.compareTo(s2)); //-1
 		System.out.println(s2.compareTo(s1)); //1
