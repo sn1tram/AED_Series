@@ -45,11 +45,11 @@ public class GetFile {
 		txt2 = br2.readLine();
 		txt3 = br3.readLine();
 		while(txt1 != null || txt2 != null || txt3 != null){
+			System.out.println(++aux);
 			String[] x = { txt1, txt2, txt3 };
 			read = true;
 			GenericHeap.buildHeap(x, new Cmp());
 			String word = x[0];
-			//if(word == null) word = x[0];
 			if(x[0].equals(txt1) && read){
 				++count;
 				txt1 = br1.readLine();
@@ -74,9 +74,9 @@ public class GetFile {
 			if (aux == 209922)
 				System.out.print("");
 			if(change && count>numberOfWords) {
-				System.out.println(++aux);
+				//System.out.println(++aux);
 				Word line = new Word(word, count);
-				if(line.getnOcorr() > saveWords[0].getnOcorr() || saveWords[0] == null){
+				if(line.getnOcorr() > saveWords[0].getnOcorr() && saveWords[0] != null){
 					saveWords[0] = line;
 					GenericHeap.buildHeap(saveWords, new CmpObj());
 				}

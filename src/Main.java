@@ -15,7 +15,7 @@ public class Main {
 	static String s3 = "f3.txt";
 
 	public static void main(String[] args){
-		int n = 12;
+		int n = 25;
 		/*String s1 = "a", s2 = "b";
 		System.out.println(s1.compareTo(s2)); //-1
 		System.out.println(s2.compareTo(s1)); //1
@@ -24,18 +24,12 @@ public class Main {
 		System.out.println(s1.equals(null));*/
 		GetFile getFile = new GetFile(n, s1, s2, s3);
 		/*String ip = "192.168.1.1";
-		String[] a = ip.split("\\.");
+		String[] a = ip.split("\\.");*/
 		String[] ipv4 = new String[]{"192.168.1.1", "192.168.1.4", "80.68.11.31", "192.168.10.33"};
-		//System.out.println(ipv4.length);
 		String[][] x = new String[ipv4.length][ipv4.length];
 		//array bi-dimensional
 		for(int i = 0; i< ipv4.length; ++i)
-			x[i] = ipv4[i].split("\\.");*/
-
-		/*int[] a = {5, 8, 6, 7, 50, 69, 10, 22, 1};
-		ordena(a, a.length);
-		for(int i = 0; i < a.length; ++i)
-			System.out.println(a[i]);*/
+			x[i] = ipv4[i].split("\\.");
 	}
 
 	public static void ordena(int[] a, int m){
