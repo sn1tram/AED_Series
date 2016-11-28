@@ -99,16 +99,4 @@ public class Main {
 		}
 		return new Node<>();
 	}
-	/*public static int deleteSmallerThan(int[] minHeap, int sizeHeap, int k){
-		int count = 0, size = sizeHeap;
-		while(size != 0){
-			if (minHeap[0] < k){
-				++count;
-				--size;
-				minHeap[0] = minHeap[size-1];
-				Heap.minHeapify(minHeap, 0, size);
-			}else break;
-		}
-		return sizeHeap-count;
-	}*/
 }
