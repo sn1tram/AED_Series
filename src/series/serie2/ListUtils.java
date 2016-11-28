@@ -22,31 +22,73 @@ public class ListUtils {
 	}
 	
 	public static Node<Node<String>> splitBySentence(Node<String> list) {
-		Node<Node<String>> dummy = new Node<>();
-		Node<Node<String>> x = new Node<>();
-		dummy.next = dummy.previous = dummy;
-		Node<String> first = list.next, auxList = new Node<>();
-		while(first.value != null){
+		Node<Node<String>> principal = new Node<>();
+		Node<String> first = list;
+		Node<String> inNode = new Node<>();
+		Node<Node<String>> head = principal;
+		principal.next = principal.previous = principal;
+		while((first = first.next) != list){
+			Node<Node<String>> aux = new Node<>();
+			if( !first.value.equals(".")) {
+				insert(inNode, first.value);
+				remove(first);
+			}else {
+				if (first.next.value != null) {
+					if (first.next.value.equals("."))
+						continue;
+					else {
+						principal.next = aux;
+						aux.previous = principal;
+						aux.next = head;
+						head.previous = aux;
+						aux.value = inNode;
+						principal = principal.next;
+						inNode = new Node<>();
+					}
+				}
+			}
+			if(first.next.value == null) {
+				principal.next = aux;
+				aux.previous = principal;
+				aux.next = head;
+				head.previous = aux;
+				aux.value = inNode;
+				break;
+			}
+		}
+		/*while((first = first.next) != list){
 			if( first.value != "."){
 				insert(auxList, first.value);
-			}else{
-				x.value = auxList;
-				x.next = dummy;
-				if (dummy != null)
-					dummy.next = x;
-				dummy = x;
-			}
-			first = first.next;
+			}else {
+					x.value = auxList;
+					x.next = dummy;
+					if (dummy != null)
+						dummy.value = auxList;
+					dummy = x;
+			}if(first.next.value==null)
+				return dummy;
+
 		}
-		return dummy;
+		return dummy;*/
+		return head;
 	}
 	//Insert element head List
-	public static <E> Node<E> insert(Node<E> list, E e) {
-		Node<E> x = new Node<E>();
-		x.value = e; x.next = list;
-		if(list != null)
-			list.previous = x;
-		list = x;
-		return list;
+	public static <E> void insert(Node<E> list, E e) {
+		Node<E> x = new Node<>();
+		Node<E> aux = list;
+		if (list.value == null) {
+			list.value = e;
+			return;
+		}
+		while (aux.next != null)
+			aux = aux.next;
+		aux.next = x;
+		x.previous = aux;
+		x.value = e;
+	}
+
+	private static <E> void remove (Node<E> node){
+		node.previous.next = node.next;
+		node.next.previous = node.previous;
 	}
 }
