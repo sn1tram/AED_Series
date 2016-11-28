@@ -89,7 +89,7 @@ public class HashTableTest {
 			array.add(curr.value);
 			curr = curr.next;
 		}
-		curr = newList.next; 
+		curr = newList.next;
 		while (curr != newList) {
 			newArray.add(curr.value);
 			curr = curr.next;
