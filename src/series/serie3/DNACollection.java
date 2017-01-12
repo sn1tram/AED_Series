@@ -1,126 +1,66 @@
 package series.serie3;
 
-
 public class DNACollection {
 
-    private Node_DNA<String> root;
+	private static final int CHILDREN_SIZE = 4;
+	private static final int FIRST_CHAR = 97;
+	private static TNode root;
 
-    public DNACollection() {
+	public DNACollection() {
+		root = new TNode(CHILDREN_SIZE, 0, ' ');
+	}
 
-        root = new Node_DNA<>("root");
-    }
+	public void add(String fragment) {
+		fragment = fragment.toLowerCase();
+		TNode current = root, aux;
+		for (int i = 0, idx = 0; i < fragment.length(); i++) {
+			idx = converterIdx(fragment.charAt(i) - FIRST_CHAR);
+			if(current.getChilds()[idx] == null){
+				aux = new TNode(CHILDREN_SIZE, current.getCount() + 1, fragment.charAt(i));
+				current.setChilds(idx, aux);
+				current = aux;
+			}
+			else 
+				current = current.getChilds()[idx];
+		}
+	}
+	
+	private static int converterIdx(int idx){		
+		return idx == 2 ? 1 : idx == 19 ? 2 : idx == 6 ? 3 : 0;
+	}
 
-    public void add2(String fragment) {
-
-        char[] splitedString = fragment.toCharArray();
-        Node_DNA<String> currNode = root;
-        for (int i = 0; i <= splitedString.length - 1; i++) {
-            int childCount = 0;
-            boolean found = false;
-            switch (splitedString[i]) {
-                case 'A':
-                    if (currNode.getChildren().isEmpty()) {
-                        Node_DNA<String> child = new Node_DNA<String>("A");
-                        currNode.addChild(child);
-                        currNode = child;
-                    } else {
-                        for (Node_DNA<String> children : currNode.getChildren()) {
-                            childCount++;
-                            if (children.getData().equals("A")) {
-                                currNode = children;
-                                found = true;
-                                break;
-                            } else if (childCount == 4) {
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            currNode.addChild(new Node_DNA<String>("A"));
-                        }
-                    }
-                    break;
-
-                case 'C':
-                    if (currNode.getChildren().isEmpty()) {
-                        Node_DNA<String> child = new Node_DNA<String>("C");
-                        currNode.addChild(child);
-                        currNode = child;
-                    } else {
-                        for (Node_DNA<String> children : currNode.getChildren()) {
-                            childCount++;
-                            if (children.getData().equals("C")) {
-                                currNode = children;
-                                break;
-                            } else if (childCount == 4) {
-                                break;
-                            }
-                        }
-                        if (childCount < 4) {
-                            currNode.addChild(new Node_DNA<String>("C"));
-                        }
-                    }
-                    break;
-
-                case 'T':
-                    if (currNode.getChildren().isEmpty()) {
-                        Node_DNA<String> child = new Node_DNA<String>("T");
-                        currNode.addChild(child);
-                        currNode = child;
-                    } else {
-                        for (Node_DNA<String> children : currNode.getChildren()) {
-                            childCount++;
-                            if (children.getData().equals("T")) {
-                                currNode = children;
-                                break;
-                            } else if (childCount == 4) {
-                                break;
-                            }
-                        }
-                        if (childCount < 4) {
-                            currNode.addChild(new Node_DNA<String>("T"));
-                        }
-                    }
-                    break;
-            }
-
-        }
-
-    }
-
-
-    public void add(String fragment) {
-
-        char[] splitedString = fragment.toCharArray();
-        Node_DNA<String> currNode = root;
-        for (int i = 0; i <= splitedString.length - 1; i++) {
-            currNode = getStringDNANode(splitedString[i], currNode);
-        }
-
-    }
-
-    private Node_DNA<String> getStringDNANode(char c, Node_DNA<String> currNode) {
-        int childCount = 0;
-        boolean found = false;
-        if (currNode.getChildren().isEmpty()) {
-            Node_DNA<String> child = new Node_DNA<>(String.valueOf(c));
-            currNode.addChild(child);
-            currNode = child;
-        } else {
-            for (Node_DNA<String> children : currNode.getChildren()) {
-                childCount++;
-                if (children.getData().equals(String.valueOf(c))) {
-                    currNode = children;
-                    found = true;
-                    break;
-                } else if (childCount == 4) {
-                    break;
-                }
-            }
-            if (!found) {
-                currNode.addChild(new Node_DNA<>(String.valueOf(c)));
-            }
-        }
-        return currNode;
-    }
-
+	public int prefixCount(String p) {
+		p = p.toLowerCase();
+		TNode aux = root;
+		for(int i = 0, idx = 0; i < p.length(); ++i){
+			idx = converterIdx(p.charAt(i) - FIRST_CHAR);
+			if(aux.getChilds()[idx] == null)
+				return 0;
+			aux = aux.getChilds()[idx];
+		}
+		return countFragments(aux);
+	}
+	
+	private int countFragments(TNode root) {
+		if(root == null)
+			return 0;
+		TNode [] childs = root.getChilds();
+		int count = 0;
+		if(checkChilds(childs))
+			return 1;		
+		for(int i = 0; i < childs.length; ++i)
+			count += countFragments(childs[i]);
+		return count;
+	}
+	
+	private static boolean checkChilds(TNode[] childs){
+		for(int i = 0; i < childs.length; ++i)
+			if(childs[i] != null)
+				return false;
+		return true;
+	}
+	
+	public TNode getRoot(){
+		return root;
+	}
 }
